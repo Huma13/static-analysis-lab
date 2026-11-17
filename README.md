@@ -14,18 +14,18 @@ Reports are in `reports/` (`*_before.txt` and `*_after.txt`).
 
 | Issue | Type | Line(s) (original) | Description | Fix approach |
 |-------|------|--------------------|-------------|--------------|
-| `subprocess.call(..., shell=True)` (B602) | Security (High) | 56 | Command string built from input; shell injection risk | Removed the shell call; the report is printed with plain Python |
-| `eval(expression)` (B307) | Security (Medium) | 59 | Arbitrary code execution | Replaced with an `ast`-based evaluator that allows only numbers and + - * / |
-| Hardcoded password `ADMIN_PASSWORD = "admin123"` (B105) | Security (Low) | 7 | Secret in source code | Read from the `ADMIN_PASSWORD` environment variable |
-| `pickle` import and use (B403) | Security (Low) | 4, 52 | Pickle can run code when loading untrusted data | Backup now written as JSON |
-| `except: pass` (B110) | Security / Bug | 20-21 | Bare except silently hides every error | Catch `KeyError` only and print a message |
-| Mutable default argument `logs=[]` (W0102) | Bug | 9 | The list is shared across all calls | Default to `None`, create a new list inside |
-| `== None` (E711) | Style | 10 | Should use identity comparison | Changed to `is None` |
+| `subprocess.call(..., shell=True)` (B602) | Security (High) | 52 | Command string built from input; shell injection risk | Removed the shell call; the report is printed with plain Python |
+| `eval(expression)` (B307) | Security (Medium) | 55 | Arbitrary code execution | Replaced with an `ast`-based evaluator that allows only numbers and + - * / |
+| Hardcoded password `ADMIN_PASSWORD = "admin123"` (B105) | Security (Low) | 8 | Secret in source code | Read from the `ADMIN_PASSWORD` environment variable |
+| `pickle` import and use (B403) | Security (Low) | 4, 49 | Pickle can run code when loading untrusted data | Backup now written as JSON |
+| `except: pass` (B110) | Security / Bug | 22-23 | Bare except silently hides every error | Catch `KeyError` only and print a message |
+| Mutable default argument `logs=[]` (W0102) | Bug | 10 | The list is shared across all calls | Default to `None`, create a new list inside |
+| `== None` (E711) | Style | 11 | Should use identity comparison | Changed to `is None` |
 | Missing blank lines (E302/E305) | Style | many | PEP 8 needs 2 blank lines around functions | Added blank lines |
 | `open()` without `with` (R1732) | Quality | 36, 43 | File may stay open if an error occurs | Used `with open(..., encoding="utf-8")` |
 | Missing docstrings (C0114/C0116) | Quality | all | No documentation | Added module and function docstrings |
 | Unused import `sys` (F401) | Style | 2 | Dead code | Removed |
-| Crash on `add_item(123, "ten")` | Bug | 13 | `TypeError` when adding int + str | Validate types, raise `ValueError`, handled in `main()` |
+| Crash on `add_item(123, "ten")` | Bug | 14 | `TypeError` when adding int + str | Validate types, raise `ValueError`, handled in `main()` |
 
 ## Reflection
 
