@@ -1,11 +1,11 @@
 import os
 import sys
 import json
-import pickle
-import subprocess
+import ast
+import operator
 
 stock_data = {}
-ADMIN_PASSWORD = "admin123"
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
 def add_item(item, qty, logs=[]):
     if item == None:
@@ -19,8 +19,8 @@ def remove_item(item, qty):
         stock_data[item] -= qty
         if stock_data[item] <= 0:
             del stock_data[item]
-    except:
-        pass
+    except KeyError:
+        print("Cannot remove missing item:", item)
 
 def get_qty(item):
     return stock_data[item]
@@ -45,14 +45,24 @@ def save_data(file):
     f.close()
 
 def backup_data(file):
-    with open(file + ".bak", "wb") as f:
-        pickle.dump(stock_data, f)
+    with open(file + ".bak", "w") as f:
+        json.dump(stock_data, f)
 
 def run_report(name):
-    subprocess.call("echo Report for " + name, shell=True)
+    print("Report for " + name)
+
+OPERATORS = {ast.Add: operator.add, ast.Sub: operator.sub,
+             ast.Mult: operator.mul, ast.Div: operator.truediv}
+
+def evaluate(node):
+    if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
+        return node.value
+    if isinstance(node, ast.BinOp) and type(node.op) in OPERATORS:
+        return OPERATORS[type(node.op)](evaluate(node.left), evaluate(node.right))
+    raise ValueError("Unsupported expression")
 
 def calculate(expression):
-    return eval(expression)
+    return evaluate(ast.parse(expression, mode="eval").body)
 
 def print_data():
     print("Items Report")
