@@ -1,0 +1,18 @@
+inventory_system.py:1:1: F401 'os' imported but unused
+inventory_system.py:2:1: F401 'sys' imported but unused
+inventory_system.py:10:1: E302 expected 2 blank lines, found 1
+inventory_system.py:11:13: E711 comparison to None should be 'if cond is None:'
+inventory_system.py:17:1: E302 expected 2 blank lines, found 1
+inventory_system.py:22:5: E722 do not use bare 'except'
+inventory_system.py:25:1: E302 expected 2 blank lines, found 1
+inventory_system.py:28:1: E302 expected 2 blank lines, found 1
+inventory_system.py:28:30: E251 unexpected spaces around keyword / parameter equals
+inventory_system.py:28:32: E251 unexpected spaces around keyword / parameter equals
+inventory_system.py:35:1: E302 expected 2 blank lines, found 1
+inventory_system.py:42:1: E302 expected 2 blank lines, found 1
+inventory_system.py:47:1: E302 expected 2 blank lines, found 1
+inventory_system.py:51:1: E302 expected 2 blank lines, found 1
+inventory_system.py:54:1: E302 expected 2 blank lines, found 1
+inventory_system.py:57:1: E302 expected 2 blank lines, found 1
+inventory_system.py:62:1: E302 expected 2 blank lines, found 1
+inventory_system.py:76:1: E305 expected 2 blank lines after class or function definition, found 1
